@@ -9,12 +9,3 @@ def drive_timed(lspeed, rspeed, time):
     msleep(time)
     ao()
 
-def drive_distance(speed, distance):
-    clear_motor_position_counter(c.LEFT_MOTOR)
-    if speed > 0:
-        while get_motor_position_counter(c.LEFT_MOTOR) < distance * 200:
-            drive_timed(speed, speed, 1)
-    elif speed < 0:
-        while get_motor_position_counter(c.LEFT_MOTOR) > distance * 200:
-            drive_timed(speed, speed, 1)
-    ao()

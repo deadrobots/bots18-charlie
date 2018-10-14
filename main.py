@@ -4,12 +4,14 @@ from wallaby import *
 import constants as c
 import motors as m
 import actions as a
+import utils as u
 
 
 
 
 def main():
-    a.drive_distance_test()
+    enable_servos()
+    a.get_can_even_better()
 
 
 if __name__ == "__main__":

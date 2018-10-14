@@ -27,7 +27,7 @@ def get_soda_can():
     u.move_servo(c.servoArm, c.armUp, 10)
 
 
-def get_can_imporved():
+def get_can_imporved(): #line follow on the straight line and grab the can
     u.move_servo(c.servoArm, c.armDown, 10)
     u.move_servo(c.servoClaw, c.clawOpen, 10)
     u.lineFollowCan(80)
@@ -40,5 +40,14 @@ def get_can_imporved():
     msleep(500)
     u.move_servo(c.servoClaw, c.clawOpen, 10)
 
-def drive_distance_test():
-    m.drive_distance(100, 10)
+
+def get_can_even_better(): #line follow on the curved line and grab the can
+    u.move_servo(c.servoArm, c.armDown, 10)
+    msleep(100)
+    u.move_servo(c.servoClaw, c.clawOpen, 10)
+    u.lineFollowAmazing()
+    m.drive_timed(50, 50, 1000)
+    u.move_servo(c.servoClaw, c.clawClosed, 10)
+    msleep(100)
+    u.move_servo(c.servoArm, c.armUp, 10)
+
