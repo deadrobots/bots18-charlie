@@ -5,6 +5,7 @@ import constants as c
 import motors as m
 import actions as a
 import utils as u
+import camera as x
 
 # Great code overall. Some notes:
 # get_soda_can() vs lineFollow() - use consistent function naming conventions.
@@ -12,8 +13,9 @@ import utils as u
 
 
 def main():
-    enable_servos()
-    a.get_can_even_better()
+    a.init()
+    #x.camera_test()
+    x.find_pom_improved(c.CHANNEL_RED)
 
 
 if __name__ == "__main__":

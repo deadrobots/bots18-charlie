@@ -7,17 +7,22 @@ LEFT_MOTOR = 0
 RIGHT_MOTOR = 3
 
 #servo ports
-servoArm = 3
-servoClaw = 2
+servo_arm = 3
+servo_claw = 2
 
 #arm values
-armDown = 1070
-armUp = 550
+arm_down = 1070
+arm_up = 550
 
 #claw values
-clawOpen = 1889
+claw_open = 1889
 clawClosed = 900
 
 #sensor parts
-topHat = 0
+top_hat = 0
 ET = 5
+
+#camera constants
+CHANNEL_BLUE = 0
+CHANNEL_RED = 1
+CHANNEL_GREEN = 2
