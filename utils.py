@@ -11,14 +11,14 @@ def wait4Button():
         pass
     print("pressed")
 
-
+# This method can probably be re-written to be just a single WHILE statement, with one IF/ELSE statement inside. -LMB
 def move_servo(servoPort, endPosition, speed): #controls speed of servo movement
-    enable_servos()
+    enable_servos() # This should be handled in your main() function - LMB
     print ("moving servo")
     pos = get_servo_position(servoPort)
-    if (endPosition > pos ):
+    if (endPosition > pos ): # Unnecessary parentheses here. Also incorrect in my software documentation (sry), but please fix - LMB
         i = speed
-        while (pos < endPosition):
+        while (pos < endPosition): # Technically unnecessary parentheses here - LMB
             set_servo_position(servoPort, pos)
             msleep(10)
             pos = pos + i
@@ -63,7 +63,9 @@ def lineFollowUgly(speed): #looks bad but works for all lines
             motor(c.RIGHT_MOTOR, speed)
             motor(c.LEFT_MOTOR, 0)
 
-
+# Nice idea. Here's a thought for you (don't necessarily program this)
+# Can you re-write this function so that instead of an if/else cascade, you have a mathematical 
+# function to adjust the motor's speed using an equation? - LMB
 def lineFollowAmazing(): #make sure this works for a straight line and the curved line
     while analog(c.ET) < 2000:
         if analog(c.topHat) < 400:

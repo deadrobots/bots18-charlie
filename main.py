@@ -6,7 +6,9 @@ import motors as m
 import actions as a
 import utils as u
 
-
+# Great code overall. Some notes:
+# get_soda_can() vs lineFollow() - use consistent function naming conventions.
+#
 
 
 def main():
