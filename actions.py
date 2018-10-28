@@ -58,3 +58,10 @@ def get_can_even_better(): #line follow on the curved line and grab the can
     msleep(100)
     u.move_servo(c.servo_arm, c.arm_up, 10)
 
+
+def get_can_camera():
+    u.move_servo(c.servo_claw, c.claw_open, 10)
+    msleep(500)
+    u.move_servo(c.servo_arm, c.arm_down, 10)
+    msleep(500)
+    camera.get_can(c.CHANNEL_RED)

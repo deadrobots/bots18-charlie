@@ -88,8 +88,11 @@ def line_follow_amazing(): #make sure this works for a straight line and the cur
 def move_servo(servoPort, endPosition, speed): #controls speed of servo movement
     print ("moving servo")
     pos = get_servo_position(servoPort)
-    while endPosition != pos:
-        i = speed
+    i = speed
+    while endPosition != pos and abs(i) + abs(pos) < endPosition:
+        # if abs(i) + abs(pos) > endPosition:
+        #     set_servo_position(servoPort, pos)
+        #     break
         if pos < endPosition:
             set_servo_position(servoPort, pos)
             msleep(10)
