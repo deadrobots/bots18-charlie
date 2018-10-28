@@ -36,7 +36,7 @@ def find_pom(color):
     while True:
         camera_update()
         if get_object_count(color) > 0:
-            camera_update()
+            camera_update() # This needs to only be run once per loop. It is unnecessary here.
             if camera_center == get_object_center_x(color, 0):
                 print("I see something")
                 print(get_object_center_x(color, 0))
@@ -53,7 +53,11 @@ def find_pom(color):
                 motor(c.LEFT_MOTOR, 40)
                 motor(c.RIGHT_MOTOR, 20)
             else:
-                print("I can not see anything")
+                print("I can not see anything") 
+				# May I submit to you that this line^ never runs... (probably)...
+				# because you've already checked (via get_object_count()) that you are indeed seeing SOMETHING. 
+				# You need to add another case to your get_object_count() check. What will your robot do if it really
+				# doesn't see any objects of the color you're looking for? - LMB
 
 def find_pom_improved(color): #Needs testing
     camera_update_wrks()
@@ -61,7 +65,7 @@ def find_pom_improved(color): #Needs testing
     while True:
         camera_update()
         if get_object_count(color) > 0:
-            camera_update()
+            camera_update() # Only  needs to be called once per loop
             if get_object_center_x(color, 0) < 40:
                 motor(c.LEFT_MOTOR, 0)
                 motor(c.RIGHT_MOTOR, 40)
@@ -74,6 +78,8 @@ def find_pom_improved(color): #Needs testing
             elif get_object_center_x(color, 0) > 90 and get_object_center_x(color, 0) < 120:
                 motor(c.LEFT_MOTOR, 40)
                 motor(c.RIGHT_MOTOR, 20)
-            else:
+            else: 
                 motor(c.LEFT_MOTOR, 40)
                 motor(c.RIGHT_MOTOR, 40)
+		# Again, you probably need another case here. How does your robot search for more poms?
+		# see above comments on your similar function
