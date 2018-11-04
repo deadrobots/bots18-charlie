@@ -4,31 +4,13 @@ from wallaby import *
 import constants as c
 import motors as m
 
+
 def wait_4_button():
     print("waiting for button")
     ao()
     while right_button() == 0:
         pass
     print("pressed")
-
-# # This method can probably be re-written to be just a single WHILE statement, with one IF/ELSE statement inside. -LMB
-# def move_servo(servoPort, endPosition, speed): #controls speed of servo movement
-#     enable_servos() # This should be handled in your main() function - LMB
-#     print ("moving servo")
-#     pos = get_servo_position(servoPort)
-#     if endPosition > pos: # Unnecessary parentheses here. Also incorrect in my software documentation (sry), but please fix - LMB
-#         i = speed
-#         while pos < endPosition: # Technically unnecessary parentheses here - LMB
-#             set_servo_position(servoPort, pos)
-#             msleep(10)
-#             pos = pos + i
-#     elif endPosition < pos:
-#         i = speed
-#         while pos > endPosition:
-#             set_servo_position(servoPort, pos)
-#             msleep(10)
-#             pos = pos - i
-#     set_servo_position(servoPort, endPosition)
 
 
 def line_follow(speed, time): #Cheet for the curved line
@@ -85,23 +67,33 @@ def line_follow_amazing(): #make sure this works for a straight line and the cur
             motor(c.RIGHT_MOTOR, 100)
 
 
-def move_servo(servoPort, endPosition, speed): #controls speed of servo movement
+def move_servo(servo_port, end_position, speed):  # controls speed of servo movement
     print ("moving servo")
-    pos = get_servo_position(servoPort)
+    pos = get_servo_position(servo_port)
     i = speed
-    while endPosition != pos and abs(i) + abs(pos) < endPosition:
-        # if abs(i) + abs(pos) > endPosition:
-        #     set_servo_position(servoPort, pos)
-        #     break
-        if pos < endPosition:
-            set_servo_position(servoPort, pos)
+    while end_position != pos and abs(i) + abs(pos) < end_position:
+        if pos < end_position:
+            set_servo_position(servo_port, pos)
             msleep(10)
             pos = pos + i
         else:
-            set_servo_position(servoPort, pos)
+            set_servo_position(servo_port, pos)
             msleep(10)
             pos = pos - i
-    set_servo_position(servoPort, endPosition)
+    set_servo_position(servo_port, end_position)
+
+
+def find_edge():
+    m.drive_timed(-50, 50, 3000)
+    while digital(c.button) != 1:
+        m.drive_timed(50, 50, 1)
+    move_servo(c.servo_arm, c.arm_up, 10)
+    msleep(500)
+    m.drive_timed(20, 20, 1300)
+    move_servo(c.servo_claw, c.claw_open, 10)
+
+
+
 
 
 

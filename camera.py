@@ -13,8 +13,6 @@ def camera_test():
     camera_areas = []
     while True:
         camera_update()
-        if len(camera_areas) == 5:
-            camera_areas.pop(0)
         camera_areas.append(get_object_area(c.CHANNEL_RED, 0))
         area_average = sum(camera_areas) / len(camera_areas)
         print(area_average)
@@ -33,7 +31,6 @@ def find_pom(color):
     while True:
         camera_update()
         if get_object_count(color) > 0:
-            camera_update() # This needs to only be run once per loop. It is unnecessary here. Remove this one <-- LMB
             if camera_center == get_object_center_x(color, 0):
                 print("I see something")
                 print(get_object_center_x(color, 0))
@@ -65,20 +62,19 @@ def find_pom_improved(color): #Needs testing
     while True:
         camera_update()
         if get_object_count(color) > 0:
-            camera_update() # Only  needs to be called once per loop. Remove this one <-- LMB
-            if get_object_center_x(color, 0) < 40:
+            if get_object_center_x(color, 0) < 40:  # x<40
                 motor(c.LEFT_MOTOR, 0)
                 motor(c.RIGHT_MOTOR, 40)
-            elif get_object_center_x(color, 0) > 120:
+            elif get_object_center_x(color, 0) > 120:  # x>120
                 motor(c.LEFT_MOTOR, 40)
                 motor(c.RIGHT_MOTOR, 0)
-            elif get_object_center_x(color, 0) > 40 and get_object_center_x(color, 0) < 70:
+            elif get_object_center_x(color, 0) > 40 and get_object_center_x(color, 0) < 70:  # 40<x<70
                 motor(c.LEFT_MOTOR, 20)
                 motor(c.RIGHT_MOTOR, 40)
-            elif get_object_center_x(color, 0) > 90 and get_object_center_x(color, 0) < 120:
+            elif get_object_center_x(color, 0) > 90 and get_object_center_x(color, 0) < 120:  # 90<x<120
                 motor(c.LEFT_MOTOR, 40)
                 motor(c.RIGHT_MOTOR, 20)
-            else: 
+            else:                               # 70<x<90
                 motor(c.LEFT_MOTOR, 40)
                 motor(c.RIGHT_MOTOR, 40)
         else:
@@ -129,18 +125,20 @@ def find_pom_best(color): #Needs testing
                     motor(c.RIGHT_MOTOR, 40)
 
 
-def get_can(color): #Does not work yet :(
+def get_can(color): #Does not work yet
     print("Searching for cans")
     camera_update()
     camera_center = get_camera_width()/2
     camera_areas = []
-    while True:
+    area_average = get_object_area(color, 0)
+    while area_average < 1400:
+        print("I see a can")
         camera_update()
         if len(camera_areas) == 5:
             camera_areas.pop(0)
         camera_areas.append(get_object_area(color, 0))
         area_average = sum(camera_areas) / len(camera_areas)
-        if get_object_count(c.CHANNEL_RED) > 0 and area_average < 1600:
+        if get_object_count(c.CHANNEL_RED) > 0:
             if get_object_center_x(color, 0) < 40:
                 motor(c.LEFT_MOTOR, 0)
                 motor(c.RIGHT_MOTOR, 40)
@@ -156,11 +154,22 @@ def get_can(color): #Does not work yet :(
             else:
                 motor(c.LEFT_MOTOR, 40)
                 motor(c.RIGHT_MOTOR, 40)
-        elif get_object_count(c.CHANNEL_RED) > 0 and area_average >= 1600:
-            m.drive_timed(25, 25, 1000)
-            print(area_average)
-            break	# (Is this for debugging?) dunno if you want this. "break" will hop out of your while loop 
-					# If you still find that you need logic like this, then there's probably a 
-					# way to re-write the While loop -LMB
-        # else:
-        #     m.drive_timed(-10, 10, 1)
+        else:
+            m.drive_timed(20, -20, 1)
+    print(area_average)
+    m.drive_timed(50, 50, 2800)
+    msleep(500)
+    u.move_servo(c.servo_claw, c.claw_closed, 10)
+    msleep(500)
+    m.drive_timed(-50, 50, 2300)
+    while digital(c.button) != 1:
+        m.drive_timed(50, 50, 1)
+    u.move_servo(c.servo_arm, c.arm_up, 10)
+    msleep(500)
+    m.drive_timed(20, 20, 1300)
+    u.move_servo(c.servo_claw, c.claw_open, 10)
+    camera_areas = []
+    area_average = 0
+
+
+

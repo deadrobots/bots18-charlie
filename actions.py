@@ -30,7 +30,7 @@ def get_soda_can():
     msleep(1000)
     m.drive_timed(100, 100, 1000)
     msleep(500)
-    u.move_servo(c.servo_claw, c.clawClosed, 10)
+    u.move_servo(c.servo_claw, c.claw_closed, 10)
     u.move_servo(c.servo_arm, c.arm_up, 10)
 
 
@@ -40,7 +40,7 @@ def get_can_imporved(): #line follow on the straight line and grab the can
     u.line_follow_can(80)
     m.drive_timed(50, 50, 1000)
     msleep(500)
-    u.move_servo(c.servo_claw, c.clawClosed, 10)
+    u.move_servo(c.servo_claw, c.claw_closed, 10)
     u.move_servo(c.servo_arm, c.arm_up, 10)
     m.drive_timed(100, 0, 1400)
     u.move_servo(c.servo_arm, c.arm_down, 10)
@@ -54,14 +54,20 @@ def get_can_even_better(): #line follow on the curved line and grab the can
     u.move_servo(c.servo_claw, c.claw_open, 10)
     u.line_follow_amazing()
     m.drive_timed(50, 50, 1000)
-    u.move_servo(c.servo_claw, c.clawClosed, 10)
+    u.move_servo(c.servo_claw, c.claw_closed, 10)
     msleep(100)
     u.move_servo(c.servo_arm, c.arm_up, 10)
 
 
 def get_can_camera():
-    u.move_servo(c.servo_claw, c.claw_open, 10)
-    msleep(500)
-    u.move_servo(c.servo_arm, c.arm_down, 10)
-    msleep(500)
-    camera.get_can(c.CHANNEL_RED)
+    while True:
+        u.move_servo(c.servo_claw, c.claw_open, 10)
+        msleep(500)
+        u.move_servo(c.servo_arm, c.arm_down, 10)
+        msleep(500)
+        camera.get_can(c.CHANNEL_RED)
+        m.drive_timed(-20, -20, 1000)
+        m.drive_timed(50, -50, 2300)
+        u.wait_4_button()
+
+

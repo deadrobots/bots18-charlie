@@ -16,11 +16,12 @@ arm_up = 550
 
 #claw values
 claw_open = 1889
-clawClosed = 900
+claw_closed = 900
 
 #sensor parts
 top_hat = 0
 ET = 5
+button = 0
 
 #camera constants
 CHANNEL_BLUE = 0
