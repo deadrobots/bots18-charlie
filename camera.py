@@ -50,11 +50,6 @@ def find_pom(color):
             m.drive_timed(-10, 10, 1)
 
 
-
-# I like the two more "gradual" cases you programmed.
-# You probably knew this already, but I like how the test for 40 < x < 70 will run first and
-# exit the if statement, while the next check for 90 < x < 120 would've also been "triggered",
-# but since you have the more specific/smaller width first, your robot executes that code instead -LMB
 def find_pom_improved(color): #Needs testing
     print("Searching for poms")
     camera_update_wrks()
