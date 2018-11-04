@@ -125,7 +125,7 @@ def find_pom_best(color): #Needs testing
                     motor(c.RIGHT_MOTOR, 40)
 
 
-def get_can(color): #Does not work yet
+def get_can(color):  # Works for one can but not after that
     print("Searching for cans")
     camera_update()
     camera_center = get_camera_width()/2
