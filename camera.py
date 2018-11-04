@@ -72,8 +72,8 @@ def find_pom_improved(color): #Needs testing
             else:                               # 70<x<90
                 motor(c.LEFT_MOTOR, 40)
                 motor(c.RIGHT_MOTOR, 40)
-        else:
-            m.drive_timed(-10, 10, 1)
+        # else:
+        #     m.drive_timed(-10, 10, 1)
 
 
 

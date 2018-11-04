@@ -12,8 +12,10 @@ def main():
     a.init()
     #x.camera_test()
     #a.get_can_sensors()
-    a.get_can_camera()
+    #a.get_can_camera()
     #x.camera_test()
+
+    x.find_pom_improved(c.CHANNEL_GREEN)
 
 
 
