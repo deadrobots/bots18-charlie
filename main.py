@@ -5,15 +5,10 @@ import constants as c
 import motors as m
 import actions as a
 import utils as u
-import camera as x
 
 
 def main():
-    a.init()
-    #x.camera_test()
-    #a.get_can_sensors()
-    a.get_can_camera()
-    #x.camera_test()
+    pass
 
 
 
