@@ -8,7 +8,8 @@ import utils as u
 
 
 def main():
-    pass
+    enable_servos()
+    a.bumpy()
 
 
 
