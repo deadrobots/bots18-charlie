@@ -8,18 +8,18 @@ import random
 
 def bumpy():
     print("bumping")
-    u.move_servo(c.servo_claw, c.claw_closed, 10)
-    msleep(700)
-    u.move_servo(c.servo_arm, c.arm_up, 10)
-    msleep(700)
     while True:
-        while gyro_y() < 20:
-            m.drive_timed(100, 100, 1)
+        while gyro_y() > -150:
+            m.drive_timed(70, 70, 1)
+        print(gyro_y())
         m.drive_timed(-100, -100, 1000)
-        x = random.randint(500, 3000)
+        x = random.randint(500, 1500)
+        msleep(10)
         m.drive_timed(100, -100, x)
+
 
 def test():
     while True:
+        m.drive_timed(100, 100, 10)
         print(gyro_y())
-        m.drive_timed(100, 100, 1)
+        msleep(10)

@@ -8,15 +8,10 @@ import utils as u
 
 
 def main():
-    #a.test()
+    print("running")
+    # a.test()
 
     a.bumpy()
-
-
-
-
-
-
 
 
 if __name__ == "__main__":
