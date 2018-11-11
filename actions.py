@@ -59,14 +59,16 @@ def get_can_even_better(): #line follow on the curved line and grab the can
     u.move_servo(c.servo_arm, c.arm_up, 10)
 
 
-def get_can_camera():  # Works on the first can but not after that. USE BUMPY TO FIND THE EDGE OF THE BOARD
+def get_can_camera(color):  # Works on the first can but not after that. USE BUMPY TO FIND THE EDGE OF THE BOARD
     while True:
         u.move_servo(c.servo_claw, c.claw_open, 10)
         msleep(500)
         u.move_servo(c.servo_arm, c.arm_down, 10)
         msleep(500)
-        camera.get_can(c.CHANNEL_RED)
-        m.drive_timed(-20, -20, 1000)
-        m.drive_timed(50, -50, 2300)
-
-
+        camera.get_can(color)
+        m.drive_timed(-50, -50, 2100)
+        m.drive_timed(50, -50, 2100)
+        camera_update()
+        msleep(750)
+        print(get_object_count(color))
+        c.first_time = False

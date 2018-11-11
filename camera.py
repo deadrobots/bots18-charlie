@@ -120,14 +120,16 @@ def find_pom_best(color): #Needs testing
                     motor(c.RIGHT_MOTOR, 40)
 
 
-def get_can(color):  # Works for one can but not after that
+def get_can(color):  # Works pretty well but could be better
     print("Searching for cans")
     camera_update()
-    camera_center = get_camera_width()/2
-    camera_areas = []
+    msleep(100)
+    camera_areas = [0, 0, 0, 0, 0]
     area_average = get_object_area(color, 0)
-    while area_average < 1400:
-        print("I see a can")
+    print(get_object_count(color))
+    while area_average < 1400 or c.first_time is False:
+        c.first_time = True
+        print("Found a can")
         camera_update()
         if len(camera_areas) == 5:
             camera_areas.pop(0)
@@ -152,19 +154,16 @@ def get_can(color):  # Works for one can but not after that
         else:
             m.drive_timed(20, -20, 1)
     print(area_average)
-    m.drive_timed(50, 50, 2800)
+    m.drive_timed(48, 50, 2800)
     msleep(500)
     u.move_servo(c.servo_claw, c.claw_closed, 10)
     msleep(500)
-    m.drive_timed(-50, 50, 2300)
-    while digital(c.button) != 1:
-        m.drive_timed(50, 50, 1)
     u.move_servo(c.servo_arm, c.arm_up, 10)
     msleep(500)
-    m.drive_timed(20, 20, 1300)
+    m.drive_timed(-50, 50, 2100)
+    while gyro_y() > -150:
+        m.drive_timed(70, 70, 1)
+    u.move_servo(c.servo_arm, c.arm_up, 10)
+    msleep(500)
     u.move_servo(c.servo_claw, c.claw_open, 10)
-    camera_areas = []
-    area_average = 0
-
-
-
+    msleep(500)
