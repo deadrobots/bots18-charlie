@@ -6,14 +6,12 @@ import motors as m
 import actions as a
 import utils as u
 import camera as x
+import gyro as g
 
 
 def main():
-    a.init()
-    #x.camera_test()
-    #a.get_can_sensors()
-    a.get_can_camera(c.CHANNEL_RED)
-    #x.camera_test()
+    print("running")
+    g.simple_drive_with_gyro(50, 15)
 
 
 if __name__ == "__main__":

@@ -3,7 +3,7 @@ from wallaby import *
 import constants as c
 import motors as m
 import utils as u
-
+import variables as v
 
 def camera_init():
     camera_open_black()
@@ -127,34 +127,35 @@ def get_can(color):  # Works pretty well but could be better
     camera_areas = [0, 0, 0, 0, 0]
     area_average = get_object_area(color, 0)
     print(get_object_count(color))
-    while area_average < 1400 or c.first_time is False:
-        c.first_time = True
+    while area_average < 1400 or v.first_time is False:
+        v.first_time = True
         print("Found a can")
         camera_update()
         if len(camera_areas) == 5:
             camera_areas.pop(0)
         camera_areas.append(get_object_area(color, 0))
         area_average = sum(camera_areas) / len(camera_areas)
+        # Splits the cameras view into 5 sections so the robot can change the angle of its turns depending on which of the five zones red is in
         if get_object_count(c.CHANNEL_RED) > 0:
             if get_object_center_x(color, 0) < 40:
                 motor(c.LEFT_MOTOR, 0)
                 motor(c.RIGHT_MOTOR, 40)
-            elif get_object_center_x(color, 0) > 120: # like comment here -LMB
+            elif get_object_center_x(color, 0) > 120:
                 motor(c.LEFT_MOTOR, 40)
                 motor(c.RIGHT_MOTOR, 0)
-            elif get_object_center_x(color, 0) > 40 and get_object_center_x(color, 0) < 70: # And here -LMB
+            elif get_object_center_x(color, 0) > 40 and get_object_center_x(color, 0) < 70:
                 motor(c.LEFT_MOTOR, 20)
                 motor(c.RIGHT_MOTOR, 40)
             elif get_object_center_x(color, 0) > 90 and get_object_center_x(color, 0) < 120:
                 motor(c.LEFT_MOTOR, 40)
                 motor(c.RIGHT_MOTOR, 20)
-            else: # You get the idea... -LMB
+            else:
                 motor(c.LEFT_MOTOR, 40)
                 motor(c.RIGHT_MOTOR, 40)
         else:
             m.drive_timed(20, -20, 1)
     print(area_average)
-	# What is this series of steps for? No comment. Can't tell :c   -LMB
+	# Once the can is close enough this code will pick it up then find a board edge and drop the can
     m.drive_timed(48, 50, 2800)
     msleep(500)
     u.move_servo(c.servo_claw, c.claw_closed, 10)
