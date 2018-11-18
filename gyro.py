@@ -46,11 +46,11 @@ def drive_with_gyro(speed, time): # Much more complicated and questionable way t
     theta = 0
     while seconds() - start_time < time:
         if speed > 0:
-            motor(c.RIGHT_MOTOR, int((speed - speed * (1.920137e-16 + 0.000004470956*theta - 7.399285e-28*math.pow(theta, 2) - 2.054177e-18*math.pow(theta, 3) + 1.3145e-40*math.pow(theta, 4)))))
-            motor(c.LEFT_MOTOR, int((speed + speed * (1.920137e-16 + 0.000004470956*theta - 7.399285e-28*math.pow(theta, 2) - 2.054177e-18*math.pow(theta, 3) + 1.3145e-40*math.pow(theta, 4)))))
+            motor(c.RIGHT_MOTOR, int((speed - speed * (1.920137e-16 + 0.000004470956*theta))))
+            motor(c.LEFT_MOTOR, int((speed + speed * (1.920137e-16 + 0.000004470956*theta))))
         else:
-             motor(c.RIGHT_MOTOR, int((speed + speed * (1.920137e-16 + 0.000004470956*theta - 7.399285e-28*math.pow(theta, 2) - 2.054177e-18*math.pow(theta, 3) + 1.3145e-40*math.pow(theta, 4)))))
-             motor(c.LEFT_MOTOR, int((speed - speed * (1.920137e-16 + 0.000004470956*theta - 7.399285e-28*math.pow(theta, 2) - 2.054177e-18*math.pow(theta, 3) + 1.3145e-40*math.pow(theta, 4)))))
+             motor(c.RIGHT_MOTOR, int((speed + speed * (1.920137e-16 + 0.000004470956*theta))))
+             motor(c.LEFT_MOTOR, int((speed - speed * (1.920137e-16 + 0.000004470956*theta))))
         msleep(10)
         theta = theta + (gyro_z() - v.bias) * 10
 
