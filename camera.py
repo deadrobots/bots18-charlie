@@ -119,7 +119,7 @@ def find_pom_best(color): #Needs testing
                     motor(c.LEFT_MOTOR, 40)
                     motor(c.RIGHT_MOTOR, 40)
 
-
+# Needs some comments, honestly. -LMB
 def get_can(color):  # Works pretty well but could be better
     print("Searching for cans")
     camera_update()
@@ -139,21 +139,22 @@ def get_can(color):  # Works pretty well but could be better
             if get_object_center_x(color, 0) < 40:
                 motor(c.LEFT_MOTOR, 0)
                 motor(c.RIGHT_MOTOR, 40)
-            elif get_object_center_x(color, 0) > 120:
+            elif get_object_center_x(color, 0) > 120: # like comment here -LMB
                 motor(c.LEFT_MOTOR, 40)
                 motor(c.RIGHT_MOTOR, 0)
-            elif get_object_center_x(color, 0) > 40 and get_object_center_x(color, 0) < 70:
+            elif get_object_center_x(color, 0) > 40 and get_object_center_x(color, 0) < 70: # And here -LMB
                 motor(c.LEFT_MOTOR, 20)
                 motor(c.RIGHT_MOTOR, 40)
             elif get_object_center_x(color, 0) > 90 and get_object_center_x(color, 0) < 120:
                 motor(c.LEFT_MOTOR, 40)
                 motor(c.RIGHT_MOTOR, 20)
-            else:
+            else: # You get the idea... -LMB
                 motor(c.LEFT_MOTOR, 40)
                 motor(c.RIGHT_MOTOR, 40)
         else:
             m.drive_timed(20, -20, 1)
     print(area_average)
+	# What is this series of steps for? No comment. Can't tell :c   -LMB
     m.drive_timed(48, 50, 2800)
     msleep(500)
     u.move_servo(c.servo_claw, c.claw_closed, 10)
@@ -161,8 +162,8 @@ def get_can(color):  # Works pretty well but could be better
     u.move_servo(c.servo_arm, c.arm_up, 10)
     msleep(500)
     m.drive_timed(-50, 50, 2100)
-    while gyro_y() > -150:
-        m.drive_timed(70, 70, 1)
+    while gyro_y() > -150:			# You've got a basic version of bumpy. Can you tell it to pay attention to
+        m.drive_timed(70, 70, 1)	# all axis? Brief bit of math: distance formula. Math.sqrt, Math.pow, etc.
     u.move_servo(c.servo_arm, c.arm_up, 10)
     msleep(500)
     u.move_servo(c.servo_claw, c.claw_open, 10)

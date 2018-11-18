@@ -30,3 +30,4 @@ CHANNEL_GREEN = 2
 
 #Booleans
 first_time = True
+# Is this a constant?? ^ You change its value elsewhere. I don't think this should be in "constants.py" -LMB
