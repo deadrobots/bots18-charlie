@@ -92,6 +92,11 @@ def find_edge():
     m.drive_timed(20, 20, 1300)
     move_servo(c.servo_claw, c.claw_open, 10)
 
+def on_black():
+    return analog(c.top_hat) > 2500
+
+def on_white():
+    return analog(c.top_hat) < 1500
 
 
 

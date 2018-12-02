@@ -4,5 +4,6 @@
 first_time = True
 
 
-#Gryo stuff
+#gyro
 bias = 0
+turn_conversion = 5500
