@@ -6,6 +6,7 @@ import motors as m
 import constants as c
 import camera
 import variables as v
+import threading as t
 
 
 def init():
@@ -73,3 +74,35 @@ def get_can_camera(color):
         msleep(750)
         print(get_object_count(color))
         v.first_time = False
+
+
+def claw():
+    open = True
+    start_time = seconds()
+    while v.button_pressed is False:
+        if seconds() - start_time > .907:
+            if open:
+                set_servo_position(c.servo_claw, c.claw_closed)
+            else:
+                set_servo_position(c.servo_claw, c.claw_open)
+            open = not open
+            start_time = seconds()
+
+
+def drive():
+    while v.button_pressed is False:
+        motor(c.LEFT_MOTOR, 100)
+        motor(c.RIGHT_MOTOR, 100)
+    ao()
+
+
+def challenge():
+    go = t.Thread(name = 'daemon', target = drive)
+    claw1 = t.Thread(name = 'daemon', target = claw)
+    go.start()
+    claw1.start()
+    while left_button() == 0:
+        pass
+    v.button_pressed = True
+
+

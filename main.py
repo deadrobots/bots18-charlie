@@ -11,8 +11,8 @@ import gyro as g
 
 def main():
     print("running")
-    g.drive_condition(100, u.on_white)
-
+    enable_servos()
+    a.challenge()
 
 if __name__ == "__main__":
     sys.stdout = os.fdopen(sys.stdout.fileno(), "w", 0)
