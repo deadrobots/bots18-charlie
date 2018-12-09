@@ -9,7 +9,22 @@ import utils as u
 
 INCHES_TO_TICKS = 319
 
+"""
+BTW I got my code reviews all done before mednight this time! ;)
 
+Great code overall. New challenge for you, if you're up for it.
+
+You can use threads. That's great. Now this: Using threads, make your robot drive forward (straight)
+using the gyro, also while moving its arm up and down, and in another thread, make the robot
+open and close its claw. I want the claw to change direction (open/close) every 907 milliseconds (exactly) and I want the arm to change direction every 2467 milliseconds (exactly). I also want the
+robot to drive straight. I want it to do this forever.
+
+THEN, I want all motion (arms, claws, and motors) to IMMEDIATELY cease when the left button is
+pressed. Just pressed, not pressed-and-held-down. I only want to see you checking the button (via
+analog() or the left-button-funciton() once in your code... in a loop of course, but yeah)
+
+I think you can figure this one out. Have fun! -LMB
+"""
 def drive_and_servo():
     drive = threading.Thread(name = 'deamon', target = lambda: drive_distance(100,100))
     drive.start()
