@@ -13,7 +13,7 @@ import create_motors as cg
 def main():
     print("running")
     create_connect()
-    cg.create_drive_timed(300, 5)
+    cg.create_drive_timed(300, 3)
 
 
 
