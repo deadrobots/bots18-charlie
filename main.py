@@ -6,13 +6,19 @@ import motors as m
 import actions as a
 import utils as u
 import camera as x
-import gyro as g
+import lego_motors as g
+import create_motors as cg
 
 
 def main():
     print("running")
-    enable_servos()
-    a.challenge()
+    create_connect()
+    cg.create_drive_timed(300, 5)
+
+
+
+
+    create_disconnect()
 
 if __name__ == "__main__":
     sys.stdout = os.fdopen(sys.stdout.fileno(), "w", 0)
